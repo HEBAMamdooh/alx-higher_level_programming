@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 /**
- * struct listint_s - singly linked list
+ * struct list_int_s- singly linked list
  *
  * @n: integer
  * @next: points to the next node
@@ -13,16 +13,16 @@
  *              for project
  */
 
-typedef struct listint_s
+typedef struct list_int_s
 {
     int n;
-    struct listint_s *next;
-} listint_t;
+    struct list_int_s *next;
+} list_int_t;
 
-size_t print_listint(const listint_t *h);
-listint_t *add_nodeint_end(listint_t **head, const int n);
-void free_listint(listint_t *head);
+size_t print_list_int(const list_int_t *h);
+list_int_t *add_node_int_end(list_int_t **head, const int n);
+void free_list_int(list_int_t *head);
 
-int is_palindrome(listint_t **head);
+int is_palindrome(list_int_t **head);
 
 #endif /* LISTS_H */
