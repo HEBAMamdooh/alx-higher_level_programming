@@ -17,7 +17,7 @@ size_t list_int_len(const list_int_t *h)
 
 		h = h->next;
 	}
-	
+
 	return (len);
 }
 
@@ -73,11 +73,11 @@ int is_palindrome(list_int_t **head)
 	for (; i < len_cyc; i = i + 2)
 	{
 		if (start[i].n != end[len_list].n)
-			
+
 			return (0);
-		
+
 		len_list = len_list - 2;
 	}
-	
+
 	return (1);
 }
