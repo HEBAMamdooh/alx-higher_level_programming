@@ -6,8 +6,8 @@ from unicodedata import name
 from venv import create
 from sqlalchemy import create_engine, true
 from sqlalchemy.orm import sessionmaker
-from relationship_state import State
 from relationship_city import Base, City
+from relationship_state import Base, State
 
 if __name__ == "__main__":
     engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}".format(
