@@ -6,8 +6,8 @@ from unicodedata import name
 from venv import create
 from sqlalchemy import create_engine, true
 from sqlalchemy.orm import sessionmaker
+from relationship_state import State
 from relationship_city import Base, City
-from relationship_state import Base, State
 
 if __name__ == "__main__":
     engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}".format(
@@ -16,6 +16,10 @@ if __name__ == "__main__":
     session_maker = sessionmaker(bind=engine)
     session = session_maker()
 
-    session.add(City(name="San Francisco", state=State(name="California")))
+    newState = State(name='California')
+    newCity = City(name='San Francisco')
+    newState.cities.append(newCity)
+
+    session.add(newState)
+    session.add(newCity)
     session.commit()
-    session.close()
