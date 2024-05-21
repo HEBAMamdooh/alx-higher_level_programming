@@ -2,31 +2,35 @@
 
 const request = require('request');
 
-const url = 'http://swapi.co/api/films/';
-let id = parseInt(process.argv[2], 10);
-let characters = [];
+const movieId = process.argv[2];
+const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
 
-request(url, function (err, response, body) {
-    if (err == null) {
-        const resp = JSON.parse(body);
-        const results = resp.results;
-        if (id < 4) {
-            id += 3;
-        } else {
-            id -= 3;
-        }
-        for (let i = 0; i < results.length; i++) {
-            if (results[i].episode_id === id) {
-                characters = results[i].characters;
-                break;
-            }
-        }
-        for (let j = 0; j < characters.length; j++) {
-            request(characters[j], function (err, response, body) {
-                if (err == null) {
-                    console.log(JSON.parse(body).name);
-                }
-            });
-        }
+request(apiUrl, (error, response, body) => {
+    if (error) {
+        console.error(error);
+        return;
     }
+
+    const movieData = JSON.parse(body);
+    const charactersUrls = movieData.characters;
+
+    printCharacters(charactersUrls, 0);
 });
+
+function printCharacters(charactersUrls, index) {
+    if (index >= charactersUrls.length) {
+        return;
+    }
+
+    request(charactersUrls[index], (charError, charResponse, charBody) => {
+        if (charError) {
+            console.error(charError);
+            return;
+        }
+
+        const characterData = JSON.parse(charBody);
+        console.log(characterData.name);
+
+        printCharacters(charactersUrls, index + 1);
+    });
+}
