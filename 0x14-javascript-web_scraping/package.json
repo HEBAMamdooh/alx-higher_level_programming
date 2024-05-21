@@ -1,0 +1,10 @@
+{
+  "name": "0x14-javascript-web_scraping",
+  "version": "1.0.0",
+  "devDependencies": {
+    "semistandard": "*"
+  },
+  "scripts": {
+    "test": "semistandard && node my-normal-tests-littered-with-semicolons.js"
+  }
+}
